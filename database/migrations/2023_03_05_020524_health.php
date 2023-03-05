@@ -20,7 +20,7 @@ return new class extends Migration
 
         Schema::create('daily_advance', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('total_consumed');
+            $table->integer('total_consumed');
             $table->string('details')->nullable();
             $table->foreignId('disease_id')->references('id')->on('disease')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -33,6 +33,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('daily_advance');
+        Schema::dropIfExists('disease');
     }
 };
